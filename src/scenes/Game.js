@@ -1,7 +1,7 @@
-import Phaser from "phaser";
+import Phaser, { Game } from "phaser";
 import mp3 from "../assets/Orbital\ Colossus.mp3";
-import background from "../assets/scifi_platform_BG1.jpg";
-import tiles from "../assets/scifi_platformTiles_32x32.png";
+import background from "../assets/yodas-swamp.png";
+import ship from "../assets/ship.png";
 import star from "../assets/star.png"
 import { accelerate, decelerate } from "../utils";
 
@@ -17,47 +17,47 @@ export default new Phaser.Class({
   preload: function preload() {
     this.load.image("background", background);
 
-    this.load.spritesheet('tiles', tiles, {
-      frameWidth: 32,
-      frameHeight: 32
+    this.load.spritesheet('ship', ship, {
+      frameWidth: 80,
+      frameHeight: 50
     });
 
-    this.load.image("star", star);
+    // this.load.image("star", star);
   },
   create: function create() {
-    this.add.image(400, 300, "background");
+    this.add.image(500, 300, "background");
 
-    const stars = this.physics.add.group({
-      key: 'star',
-      repeat: 11,
-      setScale: {x: 0.2, y: 0.2 },
-      setXY: { x:400, y: 300 }
-    });
+    // const stars = this.physics.add.group({
+    //   key: 'star',
+    //   repeat: 11,
+    //   setScale: { x: 0.2, y: 0.2 },
+    //   setXY: { x: 400, y: 300 }
+    // });
 
-    stars.children.iterate(function (child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-      child.setVelocityX(150 - Math.random() * 300);
-      child.setVelocityY(150 - Math.random() * 300);
-      child.setBounce(1, 1);
-      child.setCollideWorldBounds(true);
-    });
+    // stars.children.iterate(function (child) {
+    //   child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    //   child.setVelocityX(150 - Math.random() * 300);
+    //   child.setVelocityY(150 - Math.random() * 300);
+    //   child.setBounce(1, 1);
+    //   child.setCollideWorldBounds(true);
+    // });
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    box = this.physics.add.image(400, 100, "tiles", 15);
+    box = this.physics.add.image(400, 100, "ship", 15);
 
-    const processCollision = (box, star) => {
-      star.destroy();
-      const starsLeft = stars.countActive();
-      if (starsLeft === 0) {
-        this.scene.start('winscreen');
-      }
-    }
+    // const processCollision = (box, star) => {
+    //   star.destroy();
+    //   const starsLeft = stars.countActive();
+    //   if (starsLeft === 0) {
+    //     this.scene.start('winscreen');
+    //   }
+    // }
 
     this.physics.add.collider(
-      stars,
+      // stars,
       box,
-      processCollision,
+      // processCollision,
       null,
       this
     );

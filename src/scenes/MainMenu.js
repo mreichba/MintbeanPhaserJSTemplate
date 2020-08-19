@@ -8,7 +8,7 @@ export default new Phaser.Class({
   initialize: function () {
     Phaser.Scene.call(this, { key: 'mainmenu' });
   },
-  create: function() {
+  create: function () {
     cursors = this.input.keyboard.createCursorKeys();
 
     graphics = this.add.graphics();
